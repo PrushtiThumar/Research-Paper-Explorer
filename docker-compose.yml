@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  explorer:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    volumes:
+      - ./data:/app/data
+      - model_cache:/root/.cache/torch
+    restart: unless-stopped
+
+volumes:
+  model_cache:
